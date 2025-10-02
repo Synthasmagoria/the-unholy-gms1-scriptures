@@ -2,7 +2,7 @@
 Code execution order is something I've always just understood through intuition. When working with step code I've always tried avoiding coding things that rely on execution order. In terms of draw code my understanding has been that it relies on depth. Most of the time I've gotten away with these shallow assumptions. So how does it really work?
 
 First interesting thing to note about instances is that the instance_ids in the instance order window in Gamemaker's room editor don't reflect the in game id's.
-![[instance_id mismatch.png]]
+![instance_id mismatch](img/instance_id mismatch.png)
 
 Two instances of the same depth and object type placed in the same room:
 ```
@@ -19,7 +19,7 @@ inst_100000 (draw)
 ```
 inst_100000 was placed first. inst_100001 was placed second.
 
-Two instances of the same depth were placed in a room. The second instance (inst_100001) is after the first (inst_100000) in the resource tree: 
+Two instances of the same depth were placed in a room. The second instance (inst_100001) is after the first (inst_100000) in the resource tree:
 ```
 inst_100000 (create)
 inst_100000 (creation code)
@@ -32,7 +32,7 @@ inst_100001 (step)
 inst_100001 (draw)
 inst_100000 (draw)
 ```
-Two instances of the same depth were placed in a room. The second instance (inst_100001) is before the first (inst_100000) in the resource tree: 
+Two instances of the same depth were placed in a room. The second instance (inst_100001) is before the first (inst_100000) in the resource tree:
 ```
 inst_100000 (create)
 inst_100000 (creation code)
@@ -61,7 +61,7 @@ inst_100001 (draw)
 ```
 
 - As expected depth execution order of draw events. Lower depth = later drawing, which means that code execution is later.
-- It turns out the Create event, Creation Code, and the Room Start event depend on instance order in the room. They were not affected by changes in depth in creation code or order changes in the resource tree. 
+- It turns out the Create event, Creation Code, and the Room Start event depend on instance order in the room. They were not affected by changes in depth in creation code or order changes in the resource tree.
 - The step event depends on object order in the resource tree. It wasn't affected by instance order in the room or depth.
 
 ### Project file references and compiler optimization

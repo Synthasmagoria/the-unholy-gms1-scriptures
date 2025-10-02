@@ -1,5 +1,5 @@
 ### Broken room functions
-You can create new rooms and add tiles and instances to them using `room_add`, `room_tile_add`, and `room_instance_add`. However you cannot remove instances from rooms using `room_instance_clear`. Regardless of whether the room you're trying to clear of instances exists in the IDE, or it was created through code, it will not work. 
+You can create new rooms and add tiles and instances to them using `room_add`, `room_tile_add`, and `room_instance_add`. However you cannot remove instances from rooms using `room_instance_clear`. Regardless of whether the room you're trying to clear of instances exists in the IDE, or it was created through code, it will not work.
 
 *The extent of which the room functions are broken has not been researched*
 
@@ -15,7 +15,7 @@ Sometimes loops can cause bad transpilations. This will increase the compile tim
 
 ### Random code event replacement
 While the game is running it is possible that code you write for an event in the IDE will replace the code in the create event of an object when you save and recompile.
-![[event overwrite bug witness.png]]
+![event overwrite bug witness](img/event overwrite bug witness.png)
 
 *Unknown cause*
 ### Debugger black screen
@@ -33,11 +33,11 @@ If you create an do-until loop it will crash the editor as well as brick your ga
 
 ### Shader type can change randomly
 When saving a project there is a chance that your shaders change type to GLSLES.
-![[shader type bug.png]]
+![shader type bug](img/shader type bug.png)
 
 ### Debugger stops working with "enough" code
 Once your project exceeds a certain amount of code the debugger might start choking and skip over the create events of objects when the game starts. Here's what yal has to say about that.
-![[debugger choking fix.png]]
+![debugger choke fix](img/debugger choking fix.png)
 ```C
 if (!debug_mode || ++x > xstart + 3) {
 	instance_destroy();
@@ -108,7 +108,7 @@ It will use the texture sample coordinates as an input for the random value gene
 
 This solution will work, but only as long as the object drawing the sprite doesn't move at a fractional speed. If it did then the sample coordinates will be between pixels (this is most likely due to texture interpolation features that make moving objects look more smooth when they're between pixels).
 In order to prevent the noise from looking animated you can pass the texel size of the texture being drawn, and then round down to the nearest pixel:
-```c 
+```c
 void main(void)
 {
 	vec2 pos = floor(v_vTexcoord / texel_size) * texel_size;
@@ -116,4 +116,3 @@ void main(void)
     fragColor = texture2D(gm_BaseTexture, v_vTexcoord + s);
 }
 ```
-
