@@ -13,7 +13,7 @@ if (argument_count == 2) {
 ### HLSL9
 It is possible to write HLSL9 shaders instead of GLSL.
 This has the benefit of removing the transpilation step that occurs when targeting Windows.
-![[hlsl9.png]]
+![hlsl9](img/hlsl9.png)
 The following is a GMS1.4.9999 HLSL9 passthrough shader.
 VERTEX:
 ```hlsl
@@ -32,14 +32,14 @@ struct PS_INPUT {
 
 PS_INPUT main(VS_INPUT input) // main is the default function name {
     PS_INPUT Output;
-	
+
     // Transform the position from object space to homogeneous projection space
     Output.Position = mul(gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION], input.vPos);
 
     // Just pass through the color data
     Output.Color = input.vColor;
     Output.TexCoord = input.vTexCoord;
- 
+
     return Output;
 }
 ```
@@ -64,7 +64,7 @@ PS_OUTPUT main(PS_INPUT In) {
 ### Unexposed API
 The collision list functions exist in Gamemaker Studio 1, but have not been exposed as part of the API. But you can enable them by creating an empty extension exposing the function names.
 
-![[collision_point_list definition.png]]
+![collision point list definitions](img/collision_point_list definition.png)
 
 The drawback is that it will fail when compiling for YYC.
 See resources for pre-made extensions.
@@ -134,7 +134,7 @@ if (false) begin
     show_debug_message("this works!");
 end else if (true) begin
     show_debug_message("compiles just fine!");
-end 
+end
 ```
 You can even mix the syntaxes
 ```C
